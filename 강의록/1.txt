@@ -1,0 +1,43 @@
+iamjiyoo@naver.com
+
+ajax - 비동기통신(Asynchronous Javascript and XML).
+실제로 웹에서 동작하는 방식은 모두 비동기 방식의 통신이다.
+ajax는 javascript로 컨트롤한다. XMLHttpRequest 객체를 통해 ajax통신 진행.
+- 기존: 서버 요청, 대기, 전체화면 새로고침 -> 서버에 요청한 데이터가 도착할 때까지 클라이언트는 대기
+	클라이언트가 request > server가 html/css 형태로 response
+- ajax: 업데이트가 필요한 부분, 화면의 일부분만 변경 -> 서버에 요청한 데이터가 도착할 동안 클라이언트는 멈추지 않고 동작
+	클라이언트 이벤트 발생 > ajax engine이 intercept > server로 request >
+	server에서 XML data / ajax object / String 등으로 ajax engine에 response > ajax engine이 html/css 형태로 변환
+
+httpRequest.send() 에서 인자는 post방식일 경우에만 사용한다.
+
+
+- 블럭태그: 처음부터 끝까지 쭉 잡아주는 태그
+- 인라인태그: 텍스트의 사이즈만큼만 잡아주는 태그
+실제 웹 개발을 할 때 <br>태그 대신 <div>로 묶는 방법을 사용함
+
+자바스크립트에서 익명함수의 우선순위가 선언된 함수보다 높음.
+function aaa() {
+	console.log("일반함수")
+}
+var aaa = function() {
+	console.log("익명함수")
+}
+aaa() 하면 익명함수가 실행됨.
+
+innerHTML - html 태그도 먹음
+innerText - html 태그조차 문자열로 받아들임
+
+jstl 접근
+1) pageScope → 페이지Scope에 접근
+2) request Scope → 리퀘스트Scope에 접근
+3) sessionScope → 세션Scope에 접근
+4) applicationScope → 어플리케이션Scope에 접근
+5) param → 파라미터값 얻어올때 ( 1개의 Key에 1개의 Value )
+6) paramValues → 파라미터값 배열로 얻어올때( 1개의 Key에 여러개의 Value) 
+7) header → 헤더값 얻어올때 ( 1개의 Key에 1개의 Value ) 
+8) headerValues → 헤더값 배열로 얻어올때 ( 1개의 Key에 여러개의 Value ) 
+9) cookie → ${cookie. key값. value값}으로 쿠키값 조회
+10) initParam → 초기 파라미터 조회
+11) pageContext → 페이지컨텍스트 객체를 참조할때
+
