@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("button").click(function() {
+			/*
+			$.ajax({
+				type: "get",
+				url: "param.jsp",
+				// data: "name=hong&age=25",
+				data: {
+					name: "홍길동",
+					age: 25
+				},
+				success: function(data){
+					$("#debug").val(data);
+				}
+			});
+			*/
+			
+			/* 파라미터 없을 때
+			$.post("param.jsp", function(data){
+				$("#debug").val(data);
+			});
+			*/
+			
+			/* 파라미터 있을 때
+			$.post("param.jsp", "name=hong&age=25", function(data){
+				$("#debug").val(data);
+			});
+			*/
+			
+			/* 객체도 가능
+			$.post("param.jsp", {name:"홍길동", age:20}, function(data){
+				$("#debug").val(data);
+			});
+			*/
+			
+			$.ajax({
+				type:"get",
+				url:"param.jsp",
+				data:{
+					name: $("#name").val(),
+					age: $("#age").val()
+				},
+				success: function(data){
+					$("#debug").val(data);
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<textarea rows="10" cols="80" id="debug"></textarea><br>
+	이름: <input type="text" name="name" id="name"><br>
+	나이: <input type="text" name="age" id="age">
+	<button>호출</button>
+</body>
+</html>
