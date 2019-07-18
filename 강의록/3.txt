@@ -1,0 +1,69 @@
+$(document).on("click", "[tag.id]", function(){})로 동적인 이벤트 추가 가능.
+
+$(this).attr("id") = document.getElementById("id")
+
+현업에서 Spring을 개발할 때에는 STS라는 eclipse add-on을 사용한다.
+
+maven project에서 src/main/java 에는 .java 파일만 들어간다.
+maven project에서 src/main/resources 에는 설정파일이 들어간다. (XML, Properties)
+테스트를 위한 폴더인 src/test도 제공된다. 배포도 안됨.
+maven 자체 설정을 위한 pom.xml
+
+spring framework = 웹 개발을 할 때 프로젝트 관리를 편하게 해주는 틀을 제공. 큰 프로젝트에 사용한다.
+결합도를 줄이고, 중복된 데이터를 없애는 기술들로 DI, AOP injection 사용.
+- DI: 객체관리. 결합도를 줄이도록 관리.
+- AOP: 코드관리. 중복된 코드를 줄이도록 관리.
+* injection? 객체나 코드를 프레임워크가 관리하고 있다가, 주입이 필요한 부분에 객체나 코드를 넣어주는 것.
+
+우리나라의 전자정보 프레임워크는 스프링으로 만들어짐.
+
+spring 버전에 따른 AOP를 설정하는 방법
+- XML: 2.5버전
+- annotation: 3, 4버전
+- java config: 4, 5버전
+
+IoC(Inversion of Control): 제어 역행
+개발자가 직접 객체를 생성하지 않고, 컨테이너가 이미 만들어 놓은 객체를 가져와 조립하는 방식의 개발.
+따라서 스프링에서 개발자는 new 라는 구문을 사용하지 않는다.
+
+DI(Dependency Inject): 의존 주입
+개발자가 컨테이너에 의존하여 객체를 생성하고, 사용하는 것.
+A 클래스에 B 클래스 객체가 존재(객체 생성하든 끌어와서 쓰든) -> composition
+
+Spring Container
+- BeanFactory: 사용 안함
+- ApplicationContext: 얘만 씀
+
+beanContainer.xml에 등록한 클래스들은 기본적으로 xml을 읽을 때 내부에서 자동으로 객체가 생성된다. (생성되는 객체는 싱글톤)
+자원의 효율을 위해 bean 태그에 lazy-init 옵션을 주어 getBean()으로 호출할 때 해당 함수를 만나면 객체가 생성되게 할 수 있다.
+
+클래스 자체가 싱글톤으로 구성되어 있을 때에는, 해당 클래스 내에 getInstance()를 만들어 준 후,
+xml파일에서 bean 태그 내에서 factory-method 옵션으로 getInstance()를 호출하여 생성할 수 있다.
+
+ClassPathXmlApplicationContext와 FileSystemXmlApplicationContextrk 합쳐진 GenericXmlApplicationContext를 사용
+
+생성자주입: getBean으로 설정한 인스턴스가 생성자로 주입되는 것 - <constructor-arg> 태그 사용
+- ref 옵션에 원하는 생성자객체의 클래스 id가 들어감.
+- 생성자의 파라미터가 여러 개인 경우, 
+속성주입: getBean으로 설정한 인스턴스가 setter를 활용해 해당 클래스 안에 주입되는 것 - <property> 태그 사용
+- name은 setTire중에 set을 버리고 소문자로 들어감. ref 옵션에는 원하는 객체의 id를 넣음.
+어노테이션 주입: 주입하려는 대상에 표기하는 것이 가장 일반적. 생성자나 setter에도 표기할 수 있다.
+- @Autowired는 위와 같고, @Resource는 변수와 setter에만 사용. 생성자 주입은 안됨.
+- @Autowired(required = false) 를 사용하면, 조건에 어긋나 자동주입이 일어나지 않을 때 null값을 넣는다.
+autowired는 타입 후 이름, resource는 이름 후 타입
+
+@Autowired 주입에서 객체를 찾는 순서
+1. type이 같은 bean을 검색하여 한 개면 그 bean 객체를 사용
+2. 두 개 이상이면 @qualifier 찾아 매칭
+3. 없으면 name이 같은거 찾아 매칭
+4. 없으면 오류 발생
+cf> type이 같은게 존재하지 않으면 이름이 같은게 있거나 @qualify가 붙어도 아예 매칭이 안됨.
+
+@Resource(name="kumTire")는 이 이름으로 매칭하라고 지정하는 것.
+
+@ 의존주입은 자바 소스를 건드리는 것이기 때문에 서버를 껐다 켜야한다는 단점이 있음.
+
+<context:component-scan base-package:"[package]">으로 <bean>을 컴파일러가 자동으로 쓰게 해준다.
+@Component, @Controller, @Service, @Repository 가 앞에 붙어있는 클래스에 대해서만 작동한다.
+xxx.ColaDrink.class 에 대해 적용해보면, <bean class="xxx.ColaDrink" id="colaDrink"/>를 대신 만들어준다.
+@Component("[id]")를 통해 원하는 id로 설정할 수도 있다.

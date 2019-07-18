@@ -50,26 +50,17 @@
 	
 	function callback(data){
 		var list = data.boxOfficeResult.dailyBoxOfficeList;
+		var idx = 0;
 		list.forEach(function (data){
-			var info = data;
-			var rank = info.rank;
-			var name = info.movieNm;
-			var audiCnt = info.audiCnt;
-			
-			$("#searchResult").append("<hr>");
-			$("#searchResult").append("<h4>" + rank + "위</h4>");
-			$("#searchResult").append("<strong>" + name + "</strong>(" + audiCnt + "명) - ");
-			
-			var movieCd = info.movieCd;
-			var actorList = "";
-			$.ajax({
+			//var movieCd = data.movieCd;
+			var promise = $.ajax({
 				type: "get",
 				url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
 				data: {
 					key: "cc5719c7f849a6c4769f3baff33a8c18",
-					movieCd: movieCd
+					movieCd: data.movieCd
 				},
-				datatype: "jsonp",
+				datatype: "jsonp"
 				//success: function (data){
 				//	var actors = data.movieInfoResult.movieInfo.actors;
 				//	actors.forEach(function(data){
@@ -80,16 +71,25 @@
 				//fail: function(){
 				//	alert("실패;;;");
 				//},
-				async: false
-			}).done(function(data){
+				//async: false
+			});
+			promise.done(function(data){
+					var rank = list[idx].rank;
+					var name = list[idx].movieNm;
+					var audiCnt = list[idx++].audiCnt;
+					var actorList = "";
 					var actors = data.movieInfoResult.movieInfo.actors;
+					$("#searchResult").append("<hr>");
+					$("#searchResult").append("<h4>" + rank + "위</h4>");
+					$("#searchResult").append("<strong>" + name + "</strong>(" + audiCnt + "명) - ");
 					actors.forEach(function(data){
 						if (actorList) actorList += ", ";
-						actorList += data.peopleNm;
+						actorList += data.peopleNm;	
 					});
+					$("#searchResult").append(actorList + "<br>");
 				});
-			$("#searchResult").append(actorList + "<br>");
-		});
+			
+			});
 	}
 	
 </script>
