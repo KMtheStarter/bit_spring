@@ -25,6 +25,6 @@ public class MyCalculator {
 
 		calc = (Calculator)ac2.getBean("calc");
 		System.out.println(calc.devide(firstNum, secondNum));
+		
 	}
-	
 }

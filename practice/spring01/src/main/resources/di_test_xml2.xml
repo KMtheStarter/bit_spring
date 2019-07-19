@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean class="di_test.Calculator" id="calculator"></bean>
+<bean class="di_test.MyCalculator" id="myCalculator">
+	<constructor-arg index="2" ref="calculator" />
+	<constructor-arg value="10"/>
+	<constructor-arg>
+		<value>7</value>
+	</constructor-arg>
+</bean>
+</beans>

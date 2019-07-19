@@ -1,0 +1,51 @@
+클래스 다이어그램에서...
+1. 맨 위: 클래스의 이름
+
+2. 중간: 변수명
+접근자 변수명: 타입
+- : private
+~: default // 동일패키지 내에서만.
+#: protected // 기본적으로는 동일 패키지 내에서만. 다른 패키지에서 상속받은것도 사용 가능.
++: public
+
+3. 맨 끝: 메소드명
+생성자
+메소드명(인자: 인자타입): 리턴형
+
+annotation을 쓰려면 xml 파일에 <bean>태그를 사용하여 정보를 등록해야 한다.
+하지만 그것도 자동으로 해주고 싶어서 생긴게 <context:component-scan>
+사용법은 <context:component-scan base-package="[패키지명]">
+지정된 패키지의 하위 모든 패키지를 스캔하여 bean으로 등록한다.
+빈으로 등록되려면 자바 클래스에서 annotation을 사용해야 한다.
+@Component, @Controller, @Service, @Repository
+위 네 가지 annotation은 다른 개발자가 코드를 보았을 때, 해당 클래스가 어떤 방식으로 사용되는지 예측하기 위함이지,
+JVM안에서 역할은 동일하기 때문에 잘못된 annotation을 선택했다 하더라도 오류가 발생하지 않는다.
+
+- Component: VO(Value Object)로 사용되는 클래스
+- Controller: MVC 모델에서 Controller에 속하는 부분(servlet과 관련된 부분)에 달아줌. servlet UI에 맞추어 실행되는 기능 제어. 포워드라던가.
+- Service: 중간 비즈니스 로직을 수행. 기능만 가지고 있는 클래스.
+- Repository: Class
+
+java config 방식에서.
+@Autowired @Qualifier("[id]")는 Config.java 파일에서 @Bean @Qualifier("[id]")와 함께 동작 가능.
+@ComponentScan(basePackages="[package name]")이 있으면 Config class가 비어도 됨.
+
+기존 OOP방식 한계
+- 중복되는 코드 발생. 복사 붙이기
+- 지저분한 코드. 핵심 기능 이외의 공통기능의 코드, 가독성이 안 좋아짐.
+- 생산성 저하
+- 재활용 저하
+- 변화의 어려움
+spring에서는 핵심 기능에 공통 기능을 삽입하기 위해 실행 시에 프록시 객체를 생성해서 공통 기능을 추가함.
+
+pojo로는 spring의 aop를 구현할 수 없음.
+
+joinpoint: 공통 관심 모듈의 기능이 삽입되어 동작될 수 있는 위치
+advice: 언제 공통 기능이 적용될 지 정하는 것
+- Before Advice: 대상 객체 호출 전에 공통 기능 실행
+- After Returning Advice: 대상 객체의 메서드가 익셉션 없이 실행된 이후에 공통 기능 실행
+- After Throwing Advice: 대상 객체의 메서드를 실행하는 도중 익셉션이 발생한 경우에 공통 기능 실행
+- After Advice: 익셉션 여부에 상관 없이 메서드 실행 후 공통 기능을 실행
+- Around Advice: 아무때나. 원하는 때.
+aspect: 공통 기능이 모여있는 클래스
+pointcut: advice를 정하는 것.
