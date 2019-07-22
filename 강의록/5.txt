@@ -1,0 +1,48 @@
+Around에선 ProceedingJoinPoint를 인자로 사용한다.
+그 중 proceed() 메소드가 위치한 곳에서 execution으로 설정해준 함수가 실행된다.
+
+aspect는 A 메소드에서 B 메소드로 가는 흐름에서, 중간에 끼어드는 것.
+따라서, A 메소드에 반환값이 있고, 그 값을 B가 전달받는다면
+aspect는 A의 반환값을 return해주어야 B가 제대로 값을 전달받을 수 있다.
+
+jsp에서 web-inf 폴더
+- web.xml: 설정
+- lib: 개발자가 사용하는 jar파일들
+- classes: 컴파일된 .class파일들이 들어감.
+
+maven project로 mvc 프로젝트 만들기
+1. pom.xml에 dependency 추가
+- jsp
+- servlet
+- spring web mvc
+
+2. 스프링 설정 파일 작성
+- src/main/resources에 config 폴더 생성, 그 하위에 spring폴더 생성
+- 안에 spring-mvc.xml 넣기. spring 관련 설정 파일이다.
+
+3. web.xml 삽입
+- src/webapp에 WEB-INF 폴더 생성
+- 안에 web.xml 넣기.
+- welcome-file-list는 최상위 경로로 접근할 때, 가이딩 해주는 스크립트
+- filter는 요청이 들어오는 모든 정보를 인코딩해주는 스크립트. doFilt로 호출
+- servlet-mapping에서, 모든 *.do 에 대해 spring에서 제공해주는 DispatcherServlet을 실행. 블랙박스. 안보인다.
+- request -> DispatcherServlet -> Java 처리 -> 띄워줄 jsp 이름과 함께 반환 -> DS가 jsp 호출 -> response
+
+ModelAndView - DispatcherServlet에 포워드 시킬 파일 이름을 알려줌. 또한, addObject를 통해 request 공유영역에 정보를 띄움.
+spring-mvc의 view-resolver에 담긴 설정에 맞춰서 전달.
+
+@RequestMapping(value="[path]" method=RequestMethod.[GET/POST]) - 경로잡을때 사용.
+@RequestParam("[name]") - 해당 name을 가진 개체들의 값을 자동으로 가져옴.
+@ModelAttribute("[원하는 이름]") - 자동으로 넘어가는 vo의 이름을 원하는 이름으로 설정. 기본값은 클래스 이름을 변수화한 것.
+@ResponseBody - xml 또는 json과 같은 메시지 기반의 서비스를 만들 때 사용
+
+비즈니스 로직이 존재하지 않고 포워딩만 해주는 controller는 너무 비효율적.
+그럴 때 spring-mvc 파일에 <mvc:view-controller path="/file/upload.do" view-name="file/fileUploadForm"/> 사용
+
+form 태그에 enctype으로 application/x-www-form-urlencoded 어쩌구를 써주면 파일 이름만 날라간다.
+진짜 파일을 날릴 땐 multipart/form-data 사용
+
+return "redirect:/form/joinForm.do"; 에서 redirect:는 spring-mvc/ 까지 경로를 가지고 있음.
+redirect를 시키면 requestScope에 가지고 있는 문자열을 url에 전달함.
+일반적인 객체는 다 날라감.
+
