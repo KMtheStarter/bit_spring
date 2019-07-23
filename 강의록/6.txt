@@ -1,0 +1,22 @@
+오라클 연습용 계정 통상적 계정 / 비밀번호
+system manager
+scott tiger
+hr hr
+
+myBatis mapper 파일에서
+${ } 은 값만 참조. 따라서 String의 경우 ' ' 를 붙여주어야 함.
+#{ } 은 ' ' 을 자동으로 처리해줌.
+하지만 LIKE 구문을 쓸 때에는 ${ } 를 써주어야 함.
+
+spring에서 junit, spring testContext를 이용하여 단위 테스트 가능.
+
+한 개의 테이블당 controller, dao, service, vo 을 하나 씩 갖는다. (거의)
+그렇다면 테이블 별로 패키지를 구분하는 것이 유용하다.
+
+Controller에 @Controller 사용 - jsp 포워딩, DispensorServlet의 공유영역에 등록
+business logic에 @Service 사용 - 비즈니스 로직 수행
+DAO에 @Repository 사용 - DB접근
+service와 DAO의 경우는 interface를 사용하여 변화에 둔감하게 만들어야 한다.
+interface에 대한 class가 하나밖에 없을 때에는 자동으로 주입되지만, 여러 개일 경우 @Qualifier를 사용해야 한다.
+
+controller -> service 호출 -> dao 호출 -> db 접근 -> 데이터 service에 반환 -> 비즈니스 로직 수행 후 controller에 반환 -> 포워딩

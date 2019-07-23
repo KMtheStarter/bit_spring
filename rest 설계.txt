@@ -1,0 +1,2 @@
+전체게시글 조회 (기본: localhost:7777/spring-database01)
+     GET    /board
