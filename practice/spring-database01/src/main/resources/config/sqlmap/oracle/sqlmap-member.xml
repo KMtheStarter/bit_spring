@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member.dao.MemberDAO">
+	<insert id="insert" parameterType="memberVO">
+		insert into t_member(id, password, name, email_id, email_domain, tel1, tel2, tel3, post, basic_addr, detail_addr)
+		values(#{id}, #{password}, #{name}, #{emailId}, #{emailDomain}, #{tel1}, #{tel2}, #{tel3}, #{post}, #{basicAddr}, #{detailAddr})
+	</insert>
+	<select id="selectAll" resultType="memberVO">
+		select id, name, email_id || '@' || email_domain as emailId, trim(tel1) || '-' || trim(tel2) || '-' || trim(tel3) as tel1,
+		to_char(reg_date, 'yyyy-mm-dd hh24:mi:ss') regDate, type
+		from t_member
+		order by reg_date
+	</select>
+	<select id="selectById" resultType="memberVO" parameterType="String">
+		select id, name, email_id || '@' || email_domain as emailId, trim(tel1) || '-' || trim(tel2) || '-' || trim(tel3) as tel1,
+		basic_addr || ' ' || detail_addr || '(' || trim(post) || ')' as detailAddr, to_char(reg_date, 'yyyy-mm-dd hh24:mi:ss') regDate
+		from t_member
+		where id = #{id}
+		<!-- where id like '%${ id }%' -->
+	</select>
+</mapper>

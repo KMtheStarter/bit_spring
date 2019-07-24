@@ -15,12 +15,23 @@ import kr.co.mlec.board.vo.BoardVO;
 public class BoardDAOImpl implements BoardDAO {
 
 	@Autowired
-	private SqlSessionTemplate sst;
+	private SqlSessionTemplate ss;
 	
 	public List<BoardVO> selectAll() {
-		List<BoardVO> list = sst.selectList("board.dao.BoardDAO.selectAll");
+		List<BoardVO> list = ss.selectList("board.dao.BoardDAO.selectAll");
 		// .close()도 자동으로 됨;;;
 		return list;
 	}
 
+	public void insert(BoardVO vo) {
+		ss.insert("board.dao.BoardDAO.insert", vo);
+	}
+
+	@Override
+	public BoardVO selectByNo(int no) {
+		BoardVO vo = ss.selectOne("board.dao.BoardDAO.selectByNo", no);
+		return vo;
+	}
+	
+	
 }

@@ -14,4 +14,14 @@ public interface BoardDAO {
 	 * return 전체게시글 
 	 */
 	public List<BoardVO> selectAll();
+	
+	/*
+	 * 게시글 등록 서비스
+	*/
+	public void insert(BoardVO vo);
+	
+	/*
+	 * 게시글 조회 서비스
+	*/
+	public BoardVO selectByNo(int no);
 }

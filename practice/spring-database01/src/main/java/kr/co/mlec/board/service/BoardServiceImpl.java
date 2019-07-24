@@ -19,4 +19,16 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
+	public void insertBoard(BoardVO vo) {
+		boardDAO.insert(vo);
+	}
+
+	@Override
+	public BoardVO selectByNoBoard(int no) {
+		BoardVO vo = boardDAO.selectByNo(no);
+		return vo;
+	}
+
+	
+	
 }

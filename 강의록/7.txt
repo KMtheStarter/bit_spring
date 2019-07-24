@@ -1,0 +1,41 @@
+jsp에 자바코드를 쓰지 않기 위해 forward 기술을 사용함.
+MVC 패턴도 jsp에 자바코드를 사용하지 않기 위해 고안함.
+
+패키지 명을 뒤에 입력하지 않아도 웹사이트에 접속하게 하기
+1. 서버 더블 클릭
+2. 하단에 Modules 선택
+3. 항목 잡고 edit
+4. path를 수정 (여기서는 /)
+이런 수정에 둔감하게 하기 위해 request.getContextPath() 사용.
+el 표기법으로 ${ pageContext.request.contextPath }
+
+Controller에서 메서드의 return 타입이 void면 value에 있는 uri를 찾게됨.
+그래서 메서드 내에 아무것도 없어도 해당 페이지로 이동함.
+
+Controller에서 jsp로 객체를 전달하는 방식
+1. ModelAndView 활용
+2. request 활용
+3. model 활용
+
+include
+1. 지시자 include - <%@ include file="" %> - 변수를 공용으로 쓰고 싶을 때 사용.
+include하려는 페이지의 코드가 길어지면 비효율적. 해당 서블릿의 코드 길이가 길어짐. 즉, 내용이 그대로 옮겨감.
+2. action include - <jsp:include page="" /> - 가장 많이 사용.
+가르키는 페이지의 메서드를 원하는 위치에서 실행함. 해당 서블릿의 코드 길이가 길어지는 것이 아님. 즉, 내용을 호출함.
+3. import tag in jstl - <c:import url="" />
+위 둘은 같은 서버에 있는 페이지만 포함할 수 있지만, 이건 다른 서버에 있는 페이지도 가능.
+
+xml, include, forward -> 프로젝트 명까지 경로 가짐
+나머지 -> 포트번호까지 경로 가짐
+
+form:form 태그: spring에서 사용하는 form태그.
+action 태그를 쓰지 않으면 자동으로 자기 자신의 uri에 post 방식으로 request를 보낸다.
+get방식으로 주소를 얻어올 때 공유영역에 VO를 생성, form:input 태그의 path에 해당 VO를 지정해주어 저장시킴.
+따라서 get방식의 controller에서 VO객체를 하나 만들어주어야 함.
+그걸 바로 보내서 정보 받음.
+
+실제로 코드를 구현할 때, mybatis mapper > dao > service > controller 순으로 구현하면 편하다.
+
+java beans -> 생성자 있어야하고, getter, setter 갖고 있어야 하고, private여야 함.
+
+@PathVariable은 restful api를 구성할 때 사용함. /board/{no}에서 no를 인자로 가져오고 싶을 때.

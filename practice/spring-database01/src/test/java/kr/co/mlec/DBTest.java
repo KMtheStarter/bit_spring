@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.mlec.board.vo.BoardVO;
+import kr.co.mlec.member.vo.MemberVO;
 
 //Junit 테스트
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,5 +45,23 @@ public class DBTest {
 		for (BoardVO e: list) {
 			System.out.println(e.toString());
 		}
+	}
+	
+	@Test
+	public void 회원가입() throws Exception{
+		MemberVO vo = new MemberVO();
+		// ${id}, ${password}, ${name}, ${emailId}, ${emailDomain}, ${tel1}, ${tel2}, ${tel3}, ${post}, ${basicAddr}, ${detailAddr}
+		vo.setId("aa");
+		vo.setPassword("aa");
+		vo.setName("aa");
+		vo.setEmailId("aa");
+		vo.setEmailDomain("aa");
+		vo.setTel1("010");
+		vo.setTel2("010");
+		vo.setTel3("010");
+		vo.setPost("aa");
+		vo.setBasicAddr("aa");
+		vo.setDetailAddr("aa");
+		sqlSessionTemplate.insert("member.dao.MemberDAO.insert", vo);
 	}
 }

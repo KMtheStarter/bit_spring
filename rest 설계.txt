@@ -1,2 +1,12 @@
-전체게시글 조회 (기본: localhost:7777/spring-database01)
-     GET    /board
+게시판
+     GET    /board			전체 게시글 조회
+     GET    /board/write		새 글 등록 폼
+     POST  /board/write		DB저장
+
+     GET	 /board/detail?no=300	상세게시글 조회
+->  GET	 /board/detail/300		300번 게시글 조회
+     PUT   /board/detail/300		300번 게시글 수정
+     DEL   /board/detail/300		300번 게시글 삭제
+
+				로그인
+				로그아웃

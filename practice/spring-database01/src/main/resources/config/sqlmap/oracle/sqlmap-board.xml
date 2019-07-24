@@ -3,10 +3,28 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.dao.BoardDAO">
+	<resultMap type="boardVO" id="boardMap">
+		<result column="reg_date" property="regDate"/>
+		<result column="view_cnt" property="viewCnt"/>
+	</resultMap>
 	<!-- 전체 게시글 조회 -->
 	<select id="selectAll" resultType="boardVO">
 		select no, title, writer, to_char(reg_date, 'yyyy-mm-dd') as regDate
 		  from t_board
 		 order by no desc
 	</select>
+	
+	<!-- 특정 글 조회 -->
+	<select id="selectByNo" parameterType="int" resultMap="boardMap">
+		select no, title, writer, content, view_cnt, to_char(reg_date, 'yyyy-mm-dd') as reg_date
+		  from t_board
+		 where no=${no}
+	</select>
+	
+	<!-- 게시글 삽입 -->
+	<insert id="insert" parameterType="boardVO">
+		insert into t_board(no, title, writer, content)
+		values(seq_t_board_no.nextval, #{title}, #{writer}, #{content})
+	</insert>
+
 </mapper>
