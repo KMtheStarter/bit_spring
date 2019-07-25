@@ -24,4 +24,10 @@ public interface BoardDAO {
 	 * 게시글 조회 서비스
 	*/
 	public BoardVO selectByNo(int no);
+	
+	/*
+	 * 게시글 삭제 서비스
+	 * @param no 삭제할 게시물 번호
+	*/
+	public void delete(int no);
 }

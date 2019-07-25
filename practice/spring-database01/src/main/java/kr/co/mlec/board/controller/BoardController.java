@@ -1,6 +1,8 @@
 package kr.co.mlec.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.mlec.board.service.BoardService;
@@ -75,7 +78,6 @@ public class BoardController {
 	public String detail(@PathVariable("no")int no, Model model) {
 		BoardVO vo = service.selectByNoBoard(no);
 		model.addAttribute("boardVO", vo);
-		System.out.println(vo);
 		return "board/detail";
 	}
 	
@@ -84,7 +86,14 @@ public class BoardController {
 	public String detail2(@RequestParam("no")int no, Model model) {
 		BoardVO vo = service.selectByNoBoard(no);
 		model.addAttribute("boardVO", vo);
-		System.out.println(vo);
 		return "board/detail";
 	}
+	
+	@RequestMapping("/board/remove/{no}")
+	public String removeBoard(@PathVariable("no") int no) {
+		System.out.println("삭제할 번호" + no);
+		// 삭제 처리 로직
+		return "redirect:/board";
+	}
+
 }

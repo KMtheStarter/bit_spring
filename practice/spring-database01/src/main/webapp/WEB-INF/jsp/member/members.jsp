@@ -15,9 +15,9 @@
 	</header>
 	<section>
 		<div align="center">
-			<br><hr>
-			<h2>회원 정보 조회</h2>
-			<hr><br>
+			<jsp:include page="/WEB-INF/jsp/include/line.jsp">
+			<jsp:param value="회원 정보 조회" name="title"/>
+			</jsp:include>
 			<table>
 				<c:forEach items="${ memberList }" var="e">
 					<tr style="height:4px"></tr>

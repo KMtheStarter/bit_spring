@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 	function addFavorite(){
 		try{
@@ -21,6 +22,9 @@
 			</a>
 		</td>
 		<td align="right">
+			<c:if test="${ not empty loginVO }">
+				[${ sessionScope.loginVO.id }님 환영합니다.]
+			</c:if>
 			<a href="#" onclick="addFavorite()">
 				즐겨찾기 추가
 			</a>
@@ -28,10 +32,20 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="${ pageContext.request.contextPath }/member">회원관리</a> ||
+			<c:if test="${ loginVO.type == 'S'}">
+				<a href="${ pageContext.request.contextPath }/member">회원관리</a> ||
+			</c:if>
 			<a href="${ pageContext.request.contextPath }/board">게시판</a> ||
-			<a href="${ pageContext.request.contextPath }/join">회원가입</a> ||
-			로그인 || 마이페이지 || 로그아웃
+			<c:choose>
+				<c:when test="${ empty loginVO }">
+					<a href="${ pageContext.request.contextPath }/join">회원가입</a> ||
+					<a href="${ pageContext.request.contextPath }/login">로그인</a> ||
+				</c:when>
+				<c:otherwise>
+					마이페이지 ||
+					<a href="${ pageContext.request.contextPath }/logout">로그아웃</a>
+				</c:otherwise>
+			</c:choose>
 		</td>
 	</tr>
 </table>

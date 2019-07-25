@@ -30,19 +30,20 @@
 	</header>
 	<section>
 		<div align="center">
-		<br><hr>
-		<h2>글 작성 폼</h2>
-		<hr><br>
+		<jsp:include page="/WEB-INF/jsp/include/line.jsp">
+		<jsp:param value="글 작성 폼" name="title"/>
+		</jsp:include>
 		<form method="post" action="${ pageContext.request.contextPath }/board/write2"
 			name="inputForm" onsubmit="return checkForm()"> <!-- return true / false에 따라 submit 되고 안되고... -->
+			<input type="hidden" name="writer" value="${ loginVO.id }">
 			<table>
 				<tr>
 					<th width="23%">제목</th>
 					<td><input type="text" name="title" size="80" autofocus="autofocus"></td>
 				</tr>
 				<tr>
-					<th width="23%">글쓴이</th>
-					<td><input type="text" name="writer" size="80"></td>
+					<th width="23%">작성자</th>
+					<td>${ loginVO.id }</td>
 				</tr>
 				<tr>
 					<th width="23%">내용</th>

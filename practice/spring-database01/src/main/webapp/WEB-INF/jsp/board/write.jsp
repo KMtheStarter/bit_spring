@@ -15,19 +15,20 @@
 	</header>
 	<section>
 		<div align="center">
-		<br><hr>
-		<h2>spring 글 작성 폼</h2>
-		<hr><br>
+		<jsp:include page="/WEB-INF/jsp/include/line.jsp">
+		<jsp:param value="spring 글 작성 폼" name="title"/>
+		</jsp:include>
 		action태그가 없어도 자기 자신한테 post방식으로 요청을 날립니다.
 		<form:form method="post" commandName="boardVO">
+			<form:input path="writer" type="hidden" value="${ loginVO.id }" />
 			<table>
 				<tr>
 					<th width="23%">제목</th>
 					<td><form:input path="title" size="80"/><form:errors path="title" class="error" /></td>
 				</tr>
 				<tr>
-					<th width="23%">글쓴이</th>
-					<td><form:input path="writer" size="80"/><form:errors path="writer" class="error" /></td>
+					<th width="23%">작성자</th>
+					<td>${ loginVO.id }</td>
 				</tr>
 				<tr>
 					<th width="23%">내용</th>

@@ -31,6 +31,12 @@ public class MemberServiceImpl implements MemberService {
 		return vo;
 	}
 
+	@Override
+	public MemberVO loginMember(MemberVO vo) {
+		MemberVO member = memberDAO.login(vo);
+		return member;
+	}
+
 	
 	
 }

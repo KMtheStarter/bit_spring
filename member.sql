@@ -17,6 +17,9 @@ create table t_member(
 select * from t_member;
 delete from t_member where id='aa';
 commit;
+insert into t_member(id, name, password, type) values
+    ('admin', 'admin', 'admin', 'S');
+    
 insert into t_member(id, password, name, email_id, email_domain, tel1, tel2, tel3, post, basic_addr, detail_addr)
 		values('cc', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc');
         rollback;
@@ -29,3 +32,5 @@ select id, name, email_id || '@' || email_domain as emailId, tel1 || '-' || tel2
 		basic_addr || ' ' || detail_addr || '(' || trim(post) || ')' as detailAddr
 		from t_member
 		where id='aa';
+        
+select * from t_board b, t_member m where b.writer = m.name;

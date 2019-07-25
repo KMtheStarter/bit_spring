@@ -9,4 +9,5 @@ public interface MemberDAO {
 	public void insert(MemberVO vo);
 	public List<MemberVO> selectAll();
 	public MemberVO selectById(String id);
+	public MemberVO login(MemberVO vo);
 }

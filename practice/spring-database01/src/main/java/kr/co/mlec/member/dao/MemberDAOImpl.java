@@ -31,6 +31,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return vo;
 	}
 
+	@Override
+	public MemberVO login(MemberVO vo) {
+		MemberVO member = ss.selectOne("member.dao.MemberDAO.login", vo);
+		return member;
+	}
+
+	
 	
 	
 }

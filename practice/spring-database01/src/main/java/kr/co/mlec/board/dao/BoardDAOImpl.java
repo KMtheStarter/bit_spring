@@ -32,6 +32,12 @@ public class BoardDAOImpl implements BoardDAO {
 		BoardVO vo = ss.selectOne("board.dao.BoardDAO.selectByNo", no);
 		return vo;
 	}
+
+	@Override
+	public void delete(int no) {
+		ss.delete("board.dao.BoardDAO.delete", no);
+	}
+	
 	
 	
 }

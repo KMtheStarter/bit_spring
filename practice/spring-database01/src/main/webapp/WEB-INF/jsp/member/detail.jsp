@@ -14,9 +14,9 @@
 	</header>
 	<section>
 		<div align="center">
-			<br><hr>
-			<h2>상세 정보 조회</h2>
-			<hr><br>
+			<jsp:include page="/WEB-INF/jsp/include/line.jsp">
+			<jsp:param value="상세 정보 조회" name="title"/>
+			</jsp:include>
 			<table>
 				<tr>
 					<th width="20%">아이디</th>

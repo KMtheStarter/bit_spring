@@ -1,0 +1,25 @@
+한 컨트롤러 클래스 내에서 forwarding을 시키는 다른 메서드들과는 달리,
+단순 문자열이나 JSON 객체를 반환하는 메서드에는 @ResponseBody를 사용한다.
+
+한 컨트롤러 클래스에 @RestController를 쓰면 해당 클래스에 있는 모든 메소드들은 String이나 JSON을 반환한다고 선언하는 것.
+따라서 @ResponseBody를 사용하지 않아도 된다.
+
+@ResponseBody가 쓰여있는 메소드의 리턴값은 View를 통해서 출력되지 않고, HTTP ResponseBody에 직접 쓰여진다.
+
+spring 4.3부터는 @GetMapping, @PostMapping ... 등이 생김
+
+프로젝트의 규모가 커지면, service에서 DAO를 호출하여 읽어들인 파일 이름(UUID) 등을 실제 파일로 연동하는 등의 작업을 수행.
+
+sendRedirect는 request영역에서 아무것도 전달하지 못하지만, 오직 문자열은 url뒤에 전달해준다.
+
+session에 있는 특정 객체 지우기 - session.removeAttribute("[ObjectKey]");
+session에 있는 객체 모두 지우기 - session.invalidate();
+
+spring에서는 session객체를 등록할 때, model을 사용하며 이 객체는 원래 requestScope에 등록되지만,
+클래스 명 앞에 @SessionAttributes({ "[ObjectKey]" }) 를 통해 sessionScope에 등록한다.
+하지만 이는 우리가 알고있는 session 영역에 실제로 저장하는 것이 아니라, spring 나름의 방식으로 저장하는 것이다.
+해당 session 객체를 가져오기 위해선 SessionStatus 객체를 이용한다.
+SessionStatus에 있는 객체를 지우기 위해선 setComplete() 메서드를 사용한다.
+
+requestScope에 접근 -> param.key
+sessionScope에 접근 -> key

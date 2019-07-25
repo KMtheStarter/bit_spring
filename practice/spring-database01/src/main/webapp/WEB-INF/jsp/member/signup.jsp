@@ -20,9 +20,9 @@ a:hover{
 	</header>
 	<section>
 		<div align="center">
-			<br><hr>
-			<h2>회원가입</h2>
-			<hr><br>
+			<jsp:include page="/WEB-INF/jsp/include/line.jsp">
+			<jsp:param value="회원가입" name="title"/>
+			</jsp:include>
 			<form:form method="post" commandName="memberVO">
 				<table>
 					<tr>

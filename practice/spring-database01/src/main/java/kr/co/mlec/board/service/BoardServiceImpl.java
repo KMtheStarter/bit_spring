@@ -29,6 +29,10 @@ public class BoardServiceImpl implements BoardService {
 		return vo;
 	}
 
+	@Override
+	public void deleteBoard(int no) {
+		boardDAO.delete(no);
+	}
 	
 	
 }
